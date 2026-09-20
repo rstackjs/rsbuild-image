@@ -28,12 +28,12 @@
     "@types/cross-spawn": "^6.0.6",
     "@types/node": "catalog:",
     "cross-spawn": "^7.0.6",
-    "get-port": "^7.1.0",
+    "get-port": "^7.2.0",
     "playwright": "catalog:",
-    "simple-git-hooks": "^2.12.1",
+    "simple-git-hooks": "^2.14.0",
     "tree-kill": "^1.2.2",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },
-  "packageManager": "pnpm@10.7.0"
+  "packageManager": "pnpm@10.34.5"
 }

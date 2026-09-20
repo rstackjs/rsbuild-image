@@ -59,8 +59,8 @@
     "preview-pack": "bash ./scripts/preview-pack.sh"
   },
   "dependencies": {
-    "image-size": "^2.0.1",
-    "knitwork": "^1.2.0",
+    "image-size": "^2.0.4",
+    "knitwork": "^1.3.0",
     "rslog": "catalog:",
     "type-fest": "catalog:",
     "ufo": "catalog:"

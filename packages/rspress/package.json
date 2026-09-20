@@ -39,13 +39,13 @@
     "unist-util-visit": "catalog:rspress"
   },
   "devDependencies": {
-    "@babel/types": "^7.27.1",
+    "@babel/types": "^7.29.8",
     "@rsbuild-image/react": "workspace:*",
     "@rsbuild/plugin-react": "catalog:",
     "@rslib/core": "catalog:",
     "@types/babel__core": "^7.20.5",
     "@types/babel__standalone": "^7.1.9",
-    "@types/babel__traverse": "^7.20.7",
+    "@types/babel__traverse": "^7.28.0",
     "@types/mdast": "catalog:rspress",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
@@ -63,6 +63,6 @@
     "react": ">=18.0.0"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18.20.8"
   }
 }
