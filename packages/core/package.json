@@ -59,7 +59,7 @@
     "preview-pack": "bash ./scripts/preview-pack.sh"
   },
   "dependencies": {
-    "image-size": "^2.0.1",
+    "image-size": "^2.0.4",
     "knitwork": "^1.2.0",
     "rslog": "catalog:",
     "type-fest": "catalog:",
@@ -95,7 +95,7 @@
   "peerDependencies": {
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0",
-    "sharp": ">=0.33.5",
+    "sharp": ">=0.35.4",
     "ipx": ">=3.0.3"
   },
   "peerDependenciesMeta": {
