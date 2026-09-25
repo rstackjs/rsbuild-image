@@ -36,7 +36,7 @@ catalog:
   react-dom: ^19.0.0
   jiti: 1.21.7
   sharp: ^0.33.5
-  ipx: ^3.0.3
+  ipx: ^4.0.0-beta.1
   '@sindresorhus/is': ^7.0.1
   '@img/sharp-wasm32': ^0.33.5
   'rsbuild-plugin-publint': ^0.3.2

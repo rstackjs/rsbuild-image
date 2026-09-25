@@ -88,6 +88,7 @@
     "sharp": "catalog:",
     "vitest": "catalog:",
     "ipx": "catalog:",
+    "ipx-v3": "npm:ipx@^3.1.1",
     "storybook": "catalog:",
     "storybook-addon-rslib": "catalog:",
     "storybook-react-rsbuild": "catalog:"
@@ -96,7 +97,7 @@
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0",
     "sharp": ">=0.33.5",
-    "ipx": ">=3.0.3"
+    "ipx": "^3.0.3 || ^4.0.0-0"
   },
   "peerDependenciesMeta": {
     "sharp": {

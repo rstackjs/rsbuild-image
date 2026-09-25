@@ -1,6 +1,7 @@
+import type { IncomingMessage, ServerResponse } from 'node:http';
 import path from 'node:path';
 import type { RsbuildPlugin, RsbuildPluginAPI, Rspack } from '@rsbuild/core';
-import type { IPXOptions, IPXStorage } from 'ipx';
+import type { IPX, IPXOptions, IPXStorage } from 'ipx';
 import { withoutBase } from 'ufo';
 import type { LoaderOptions } from './loader';
 import { logger } from './logger';
@@ -59,6 +60,33 @@ async function loadIPXModule() {
     if (isModuleNotFoundError(err)) throw new IPXNotFoundError();
     throw err;
   }
+}
+
+type IPXNodeMiddleware = (req: IncomingMessage, res: ServerResponse) => unknown;
+
+type IPXNodeMiddlewareFactory = (ipx: IPX) => IPXNodeMiddleware;
+
+/**
+ * Create a Node.js request handler for the IPX instance.
+ * Uses `createIPXNodeHandler` from ipx 4 and falls back to
+ * `createIPXNodeServer` from ipx 3, which was removed in ipx 4.
+ */
+function createIPXNodeMiddleware(mod: object, ipx: IPX): IPXNodeMiddleware {
+  if (
+    'createIPXNodeHandler' in mod &&
+    typeof mod.createIPXNodeHandler === 'function'
+  ) {
+    return (mod.createIPXNodeHandler as IPXNodeMiddlewareFactory)(ipx);
+  }
+  if (
+    'createIPXNodeServer' in mod &&
+    typeof mod.createIPXNodeServer === 'function'
+  ) {
+    return (mod.createIPXNodeServer as IPXNodeMiddlewareFactory)(ipx);
+  }
+  throw new Error(
+    'Unsupported ipx version: expected `createIPXNodeHandler` (ipx 4) or `createIPXNodeServer` (ipx 3) to be exported.',
+  );
 }
 
 function createBundlerStorage(compiler: Rspack.Compiler): IPXStorage {
@@ -164,7 +192,7 @@ export const pluginImage = (
         // Panic while leave both `ipx` & `loader` empty,
         if (!ipx && !options?.loader) throw new LoaderOrIPXRequiredError();
         if (!ipx) return;
-        const { createIPX, createIPXNodeServer } = await loadIPXModule();
+        const ipxModule = await loadIPXModule();
         const { assetPrefix = DEFAULT_IPX_BASENAME, ...ipxOptions } = ipx;
 
         return mergeRsbuildConfig(config, {
@@ -185,11 +213,14 @@ export const pluginImage = (
 
                 const { storage = createBundlerStorage(compiler), ...rest } =
                   ipxOptions;
-                const ipx = createIPX({ storage, ...rest });
+                const ipx = ipxModule.createIPX({ storage, ...rest });
                 logger.debug(`Created IPX with local storage from ${distPath}`);
                 logger.debug(`Created IPX with assetPrefix ${assetPrefix}`);
 
-                const originalMiddleware = createIPXNodeServer(ipx);
+                const originalMiddleware = createIPXNodeMiddleware(
+                  ipxModule,
+                  ipx,
+                );
                 middlewares.unshift((req, res, _next) => {
                   const next = () => {
                     logger.debug(`IPX middleware incoming request: ${req.url}`);
