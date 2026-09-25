@@ -212,8 +212,8 @@ importers:
   packages/core:
     dependencies:
       image-size:
-        specifier: ^2.0.1
-        version: 2.0.2
+        specifier: ^2.0.4
+        version: 2.0.4
       knitwork:
         specifier: ^1.2.0
         version: 1.2.0
@@ -2963,9 +2963,9 @@ packages:
   image-meta@0.2.1:
     resolution: {integrity: sha512-K6acvFaelNxx8wc2VjbIzXKDVB0Khs0QT35U6NkGfTdCmjLNcO2945m7RFNR9/RPVFm48hq7QPzK8uGH18HCGw==}
 
-  image-size@2.0.2:
-    resolution: {integrity: sha512-IRqXKlaXwgSMAMtpNzZa1ZAe8m+Sa1770Dhk8VkSsP9LS+iHD62Zd8FQKs8fbPiagBE7BzoFX23cxFnwshpV6w==}
-    engines: {node: '>=16.x'}
+  image-size@2.0.4:
+    resolution: {integrity: sha512-QRUkFFsRV/6fuESxb9Vkq+a0LkSrgKXuc2NEqfikiXxxN/G3tjWt5EVUlMaImRBZRZK/jRBEbYvpPYZL8t08Zw==}
+    engines: {node: '>=18'}
     hasBin: true
 
   indent-string@4.0.0:
@@ -7243,7 +7243,7 @@ snapshots:
 
   image-meta@0.2.1: {}
 
-  image-size@2.0.2: {}
+  image-size@2.0.4: {}
 
   indent-string@4.0.0: {}
 
