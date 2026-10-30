@@ -12,7 +12,7 @@ catalog:
   '@types/react-dom': ^19.0.10
   playwright: ^1.51.1
   typescript: ^5.8.3
-  vitest: ^3.1.1
+  vitest: ^4.0.0
   '@types/debug': ^4.1.12
   debug: ^4.4.0
   rslog: ^1.1.0
