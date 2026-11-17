@@ -164,7 +164,13 @@ export const pluginImage = (
         // Panic while leave both `ipx` & `loader` empty,
         if (!ipx && !options?.loader) throw new LoaderOrIPXRequiredError();
         if (!ipx) return;
-        const { createIPX, createIPXNodeServer } = await loadIPXModule();
+        const ipxModule = await loadIPXModule();
+        const { createIPX, createIPXNodeServer } = ipxModule;
+        // ipx 4 replaced `createIPXNodeServer` with `createIPXNodeHandler`.
+        const createNodeHandler =
+          'createIPXNodeHandler' in ipxModule
+            ? (ipxModule.createIPXNodeHandler as typeof createIPXNodeServer)
+            : createIPXNodeServer;
         const { assetPrefix = DEFAULT_IPX_BASENAME, ...ipxOptions } = ipx;
 
         return mergeRsbuildConfig(config, {
@@ -189,7 +195,7 @@ export const pluginImage = (
                 logger.debug(`Created IPX with local storage from ${distPath}`);
                 logger.debug(`Created IPX with assetPrefix ${assetPrefix}`);
 
-                const originalMiddleware = createIPXNodeServer(ipx);
+                const originalMiddleware = createNodeHandler(ipx);
                 middlewares.unshift((req, res, _next) => {
                   const next = () => {
                     logger.debug(`IPX middleware incoming request: ${req.url}`);
