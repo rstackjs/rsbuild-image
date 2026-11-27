@@ -35,7 +35,7 @@ catalog:
   react: ^19.0.0
   react-dom: ^19.0.0
   jiti: 1.21.7
-  sharp: ^0.33.5
+  sharp: ^0.35.0
   ipx: ^3.0.3
   '@sindresorhus/is': ^7.0.1
   '@img/sharp-wasm32': ^0.33.5
